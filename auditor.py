@@ -2,17 +2,22 @@ inventory = 0
 failed_enteries = 0
 
 while True:
-        stock = str(input("Enter the stock quantity (or type 'quit'): "))
-        if stock.isdigit():
-                stock = int(stock)
-                inventory += stock
-        elif stock < 0:
-            print("Invalid input. Please enter a positive integer.")
-            failed_enteries +=1
-        elif stock > 500:
-            print("Stock quantity exceeds maximum 500 units. Please enter a valid quantity number")
+        stock = (input("Enter the stock quantity (or type 'quit'): "))
+        if stock == 'quit':
+               print("Exiting the program.")
+               print ("Total Units Processed:" , inventory)
+               print ("Number of Failed/Rejected Entries:" , failed_enteries)
+               break
+        elif stock.startswith("-") and stock[1:].isdigit():
+              print("Invalid input. Please enter a positive integer.")
+              failed_enteries +=1
+        elif not stock.isdigit():
+            print("Invalid input. Please enter a valid integer.")
             failed_enteries +=1
         else:
-                print("Exiting the program.")
-                print ("Total Units Processed:" , inventory)
-                print ("Number of Failed/Rejected Entries:" , failed_enteries)
+              stock = int(stock)
+              inventory += stock
+              if inventory > 500 :
+                    print ("Inventory exceeds 500 units.")
+                    failed_enteries +=1
+                    break

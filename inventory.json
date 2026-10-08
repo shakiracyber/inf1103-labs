@@ -4,5 +4,11 @@
         "name": "Laptop",
         "price": 1200.0,
         "stock": 45
+    },
+    {
+        "id": "P002",
+        "name": "Keyboard",
+        "price": 60.0,
+        "stock": 79
     }
 ]

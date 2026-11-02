@@ -19,3 +19,5 @@ class Product:
             f"Price: ${self.price:.2f} | "
             f"Stock: {self.stock}"
         )
+    def get_product_id(self):
+            return self.__product_id

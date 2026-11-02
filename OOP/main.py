@@ -102,7 +102,7 @@ def main():
             print("5. Save inventory")
             print("6. Exit")
 
-            choice = input("Enter your choice (1-5): ").strip()
+            choice = input("Enter your choice (1-6): ").strip()
 
             if choice == "1":
                   inventory.display_inventory()

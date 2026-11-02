@@ -1,10 +1,49 @@
+from pathlib import Path
+import json
 from product2 import Product
 from inventory2 import Inventory
 
-from pathlib import Path
-import json
-
 filename = Path("inventory.json")
+#load inventory from file if it exists, otherwise create a new file
+def load_inventory():
+    inventory = Inventory()
+
+    if filename.exists():
+        try:
+            with open(filename, "r") as file:
+                inventory_data = json.load(file)
+
+            for product_data in inventory_data:
+                product = Product(
+                    product_data["id"],
+                    product_data["name"],
+                    product_data["price"],
+                    product_data["stock"]
+                )
+
+                inventory.add_product(product)
+
+            print("Inventory loaded successfully.")
+
+        except (json.JSONDecodeError, KeyError, TypeError, ValueError):
+            print("Unable to load inventory.")
+
+    else:
+        print("inventory.json not found.")
+
+    return inventory
+#save inventory to json file
+def save_inventory(inventory):
+      products = inventory.get_all_products()
+      inventory_data = []
+
+      for product in products:
+            inventory_data.append(product.to_dict())
+      with open(filename, "w") as file:
+            json.dump(inventory_data, file, indent=4)
+
+      print("Inventory saved successfully!")
+    
 #add a new product
 def add_product(inventory):
       print ("\nAdd a new product")
@@ -53,19 +92,15 @@ def update_product_stock(inventory):
            print(f"Product with ID {product_id} not found.")
 
 def main():
-    inventory = Inventory()
-
-    inventory.add_product(Product("P001", "Laptop", 1200.0, 45))
-
-    inventory.add_product(Product("P002", "Smartphone", 800.0, 30))
-
+    inventory = load_inventory()
     while True:
             print("\nMenu:")
             print("1. Display all products")
             print("2. Search for a product")
             print("3. Add a new product")
             print("4. Update product stock")
-            print("5. Save and exit")
+            print("5. Save inventory")
+            print("6. Exit")
 
             choice = input("Enter your choice (1-5): ").strip()
 
@@ -86,8 +121,10 @@ def main():
             elif choice == "4":
                   update_product_stock(inventory)
             elif choice == "5":
-                  inventory.save_to_file("inventory.json")
-                  break
+                  save_inventory(inventory)
+            elif choice == "6":
+                    print("Exiting the program.")
+                    break
             else:
                   print("Invalid choice. Please try again.")
 

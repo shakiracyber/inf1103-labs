@@ -29,3 +29,6 @@ class Inventory:
             if product.get_product_id() == product_id:
                 return product
         return None
+
+    def get_all_products(self):
+        return self.products.copy()

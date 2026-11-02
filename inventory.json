@@ -10,5 +10,11 @@
         "name": "Keyboard",
         "price": 60.0,
         "stock": 79
+    },
+    {
+        "id": "P003",
+        "name": "Keyboard",
+        "price": 67.0,
+        "stock": 8
     }
 ]

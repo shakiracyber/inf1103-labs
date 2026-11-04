@@ -1,6 +1,7 @@
 from pathlib import Path
 import json
-from product2 import Product
+from physical_product import PhysicalProduct
+from digital_product import DigitalProduct
 from inventory2 import Inventory
 
 filename = Path("inventory.json")
@@ -14,14 +15,27 @@ def load_inventory():
                 inventory_data = json.load(file)
 
             for product_data in inventory_data:
-                product = Product(
-                    product_data["id"],
-                    product_data["name"],
-                    product_data["price"],
-                    product_data["stock"]
-                )
-
-                inventory.add_product(product)
+              product_type = product_data.get("type")
+              if product_type == "physical":
+                    product = PhysicalProduct(
+                          product_data["id"],
+                          product_data["name"],
+                          product_data["price"],
+                          product_data["stock"],
+                          product_data["weight"]
+                          )
+              elif product_type == "digital":
+                    product = DigitalProduct(
+                          product_data["id"],
+                          product_data["name"],
+                          product_data["price"],
+                          product_data["stock"],
+                          product_data["download_size"]
+                          )
+              else:
+                    print("Unknown product type. Skipping record.")
+                    continue
+              inventory.add_product(product)
 
             print("Inventory loaded successfully.")
 
@@ -47,6 +61,14 @@ def save_inventory(inventory):
 #add a new product
 def add_product(inventory):
       print ("\nAdd a new product")
+      print("\nSelect product type:")
+      print("1. Physical Product")
+      print("2. Digital Product")
+
+      product_type = input("Enter your choice (1 or 2): ").strip()
+      if product_type not in ("1","2"):
+            print("Invalid choice. Please select 1 or 2.")
+            return
 
       product_id = input("Enter the product ID: ").strip()
 
@@ -69,8 +91,24 @@ def add_product(inventory):
                   print("Price and stock must be non-negative.")
                   return
 
-            new_product = Product(product_id, name, price, stock)
+            if product_type == "1":
+                 weight = float(input("Enter weight (kg):"))
+                 
+                 if weight < 0:
+                  print("Weight cannot be negative.")
+                  return
+                 
+                 new_product = PhysicalProduct( product_id, name, price, stock, weight)
+            elif product_type == "2":
+                 download_size = float(input("Enter download size (MB): "))
 
+                 if download_size < 0:
+                      print("Download size cannot be negative.")
+                      return
+                 
+                 new_product = DigitalProduct( product_id, name, price, stock, download_size)
+                 
+      
             if inventory.add_product(new_product):
                   print("Product added successfully.")  
             else:

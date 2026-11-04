@@ -1,26 +1,18 @@
 [
     {
         "id": "P001",
-        "name": "Laptop",
-        "price": 1200.0,
-        "stock": 45
+        "name": "keyboard",
+        "price": 90.0,
+        "stock": 56,
+        "type": "physical",
+        "weight": 89.0
     },
     {
-        "id": "P002",
-        "name": "Keyboard",
-        "price": 60.0,
-        "stock": 79
-    },
-    {
-        "id": "P003",
-        "name": "Keyboard",
-        "price": 67.0,
-        "stock": 8
-    },
-    {
-        "id": "P004",
-        "name": "Mouse",
-        "price": 34.0,
-        "stock": 3
+        "id": "D01",
+        "name": "FIFA",
+        "price": 56.0,
+        "stock": 4,
+        "type": "digital",
+        "download_size": 90.0
     }
 ]

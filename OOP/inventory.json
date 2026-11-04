@@ -14,5 +14,13 @@
         "stock": 4,
         "type": "digital",
         "download_size": 90.0
+    },
+    {
+        "id": "P002",
+        "name": "mouse",
+        "price": 43.0,
+        "stock": 98,
+        "type": "physical",
+        "weight": 5.0
     }
 ]

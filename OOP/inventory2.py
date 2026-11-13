@@ -20,7 +20,7 @@ class Inventory:
                 return True
         return False
 
-    def display_inventory(self):
+    def display_inventory(self) -> None:
         print("\nCurrent Inventory:")
         print("-" *45)
 
@@ -40,5 +40,5 @@ class Inventory:
     def find_product(self, product_id: str) -> Product | None:
         return self.search_product(product_id)
 
-    def get_all_products(self):
+    def get_all_products(self) -> list[Product]:
         return self.products.copy()

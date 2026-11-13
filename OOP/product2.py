@@ -9,24 +9,24 @@ class Product(ABC):
         self.stock = stock
         self.supplier: Supplier = supplier
 
-    def update_stock(self, quantity):
+    def update_stock(self, quantity) -> None:
         if quantity >= 0:
             self.stock = quantity
             print(f"Stock updated successfully")
         else:
             print("Stock must be non-negative.")
        
-    def display_information(self):
+    def display_information(self) -> None:
         print(
             f"ID: {self.__product_id} | "
             f"Name: {self.name} | "
             f"Price: ${self.price:.2f} | "
             f"Stock: {self.stock}"
         )
-    def get_product_id(self):
+    def get_product_id(self) -> str:
             return self.__product_id
 
-    def to_dict(self):
+    def to_dict(self)-> dict[str, str | float | int]:
          return {
             "id": self.__product_id,
             "name": self.name,
@@ -35,5 +35,5 @@ class Product(ABC):
          }
 
     @abstractmethod
-    def get_fulfillment_info(self):
+    def get_fulfillment_info(self) -> str:
         pass
